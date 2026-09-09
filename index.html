@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gene Jersey Collections</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-dark: #8a6e2f;
+    --white: #f5f0e8;
+    --grey: #1a1a1a;
+    --text-muted: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--white);
+    font-weight: 300;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.5rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-logo-mark {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .diamond {
+    width: 70px;
+    height: 70px;
+    border: 2px solid var(--gold);
+    transform: rotate(45deg);
+    position: absolute;
+  }
+
+  .diamond-inner {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.6), rgba(138,110,47,0.8), rgba(201,168,76,0.4));
+    transform: rotate(45deg);
+    position: absolute;
+    opacity: 0.7;
+  }
+
+  .gj-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black);
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    color: var(--white);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+    opacity: 0.65;
+    line-height: 1.8;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--black);
+    padding: 0.85rem 2.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* TICKER */
+  .ticker {
+    background: var(--gold);
+    padding: 0.6rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 25s linear infinite;
+  }
+
+  .ticker span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    padding: 0 2.5rem;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ABOUT */
+  .about { background: var(--grey); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-box {
+    width: 220px;
+    height: 220px;
+    border: 1px solid var(--gold);
+    transform: rotate(12deg);
+    position: absolute;
+    opacity: 0.3;
+  }
+
+  .about-box-2 {
+    width: 180px;
+    height: 180px;
+    border: 1px solid var(--gold-light);
+    transform: rotate(-8deg);
+    position: absolute;
+    opacity: 0.2;
+  }
+
+  .about-center-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.6;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-text p {
+    opacity: 0.7;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    max-width: 420px;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* SHOP / CATEGORIES */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .shop-card {
+    background: var(--grey);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: var(--white);
+  }
+
+  .shop-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .shop-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .shop-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+  }
+
+  .shop-card p {
+    font-size: 0.82rem;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+
+  .shop-card .card-link {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 2px;
+  }
+
+  /* CLUBS SECTION */
+  .clubs { background: var(--grey); }
+
+  .clubs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .club-tag {
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 0.6rem 1.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: border-color 0.2s, opacity 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .club-tag:hover { border-color: var(--gold); opacity: 1; color: var(--gold); }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .why-card {
+    border-top: 1px solid rgba(201,168,76,0.3);
+    padding-top: 1.5rem;
+  }
+
+  .why-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .why-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .why-card p {
+    font-size: 0.82rem;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+
+  /* MARQUEE QUOTE */
+  .quote-section {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(138,110,47,0.05));
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .quote-section blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--grey); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-bottom: 2rem;
+    max-width: 360px;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.88rem;
+  }
+
+  .contact-detail-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .contact-detail a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: color 0.2s, opacity 0.2s;
+  }
+
+  .contact-detail a:hover { color: var(--gold); opacity: 1; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    color: var(--white);
+    padding: 0.85rem 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--gold); }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { opacity: 0.35; color: var(--white); }
+
+  .contact-form textarea { height: 130px; resize: vertical; }
+
+  .contact-form button {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--black);
+    border: none;
+    padding: 0.9rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+  }
+
+  .contact-form button:hover { opacity: 0.85; }
+
+  .btn-ig-dm {
+    display: block;
+    text-align: center;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--white);
+    padding: 0.9rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    width: 100%;
+  }
+
+  .btn-ig-dm:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* FAQ */
+  .faq-list { margin-top: 3rem; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    padding: 1.4rem 0;
+    cursor: pointer;
+  }
+
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.92rem;
+    font-weight: 400;
+  }
+
+  .faq-q span { color: var(--gold); font-size: 1.1rem; transition: transform 0.2s; }
+
+  .faq-a {
+    font-size: 0.85rem;
+    opacity: 0.55;
+    margin-top: 0.8rem;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    opacity: 0.4;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-links a:hover { opacity: 1; }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    opacity: 0.3;
+    letter-spacing: 0.05em;
+  }
+
+  /* INSTAGRAM FEED */
+  .ig-feed-section { background: var(--black); }
+
+  .ig-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .ig-handle {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: var(--white);
+    opacity: 0.7;
+    font-size: 0.85rem;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .ig-handle:hover { opacity: 1; color: var(--gold); }
+
+  .ig-handle-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+
+  .ig-card {
+    aspect-ratio: 1;
+    background: var(--grey);
+    border: 1px solid rgba(201,168,76,0.08);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .ig-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(0,0,0,0.4));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .ig-card:hover::after { opacity: 1; }
+
+  .ig-card-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .ig-card-emoji { font-size: 2rem; }
+
+  .ig-card-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    color: var(--white);
+  }
+
+  .ig-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 2;
+  }
+
+  .ig-card:hover .ig-card-overlay { opacity: 1; }
+
+  .ig-card-overlay span {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .ig-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .ig-cta p {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .shop-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-visual { height: 200px; }
+    .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">GENE <span>JERSEY</span></a>
+  <ul class="nav-links">
+    <li><a href="#who-we-are">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#available-clubs">Clubs</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/2348062816965" target="_blank" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-logo-mark">
+      <div class="diamond-inner"></div>
+      <div class="diamond"></div>
+      <span class="gj-text">GJ</span>
+    </div>
+    <h1>Wear the<br><em>Game.</em></h1>
+    <p class="hero-sub">Gene Jersey Collections provides the most authentic and original soccer jerseys from your favourite leagues. Home, away, third kits — we have them all.</p>
+    <p class="hero-tagline">"If You Don't Buy, then You Will Find Rates High."</p>
+    <div class="hero-actions">
+      <a href="shop.html" class="btn-primary">Shop Jerseys</a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>New Season Kits Available</span>
+    <span>⚽</span>
+    <span>Authentic Jerseys</span>
+    <span>⚽</span>
+    <span>Home · Away · Third Kits</span>
+    <span>⚽</span>
+    <span>Club Polos Available</span>
+    <span>⚽</span>
+    <span>Fast Delivery</span>
+    <span>⚽</span>
+    <span>All Clubs. All Sizes.</span>
+    <span>⚽</span>
+    <span>New Season Kits Available</span>
+    <span>⚽</span>
+    <span>Authentic Jerseys</span>
+    <span>⚽</span>
+    <span>Home · Away · Third Kits</span>
+    <span>⚽</span>
+    <span>Club Polos Available</span>
+    <span>⚽</span>
+    <span>Fast Delivery</span>
+    <span>⚽</span>
+    <span>All Clubs. All Sizes.</span>
+    <span>⚽</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="who-we-are">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-box"></div>
+        <div class="about-box-2"></div>
+        <span class="about-center-text">GJC</span>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">More than a jersey. It's identity.</h2>
+        <p>Gene Jersey Collections is an online soccer shop that provides you with the most authentic and original soccer jerseys from your favourite leagues.</p>
+        <p>Whether you are looking for home, away or third jerseys, club polos, or any kit you can name — we have them all in hundreds of designs and styles to choose from.</p>
+        <div class="about-stats">
+          <div>
+            <span class="stat-num">500+</span>
+            <span class="stat-label">Designs</span>
+          </div>
+          <div>
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Clubs</span>
+          </div>
+          <div>
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Authentic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="container">
+    <p class="section-label">What We Sell</p>
+    <h2 class="section-title">Every kit. Every club.</h2>
+    <div class="shop-grid">
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">🏠</span>
+        <h3>Home Jerseys</h3>
+        <p>Your club's iconic home kit. Wear it with pride every match day.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">✈️</span>
+        <h3>Away & Third Kits</h3>
+        <p>Stand out from the crowd with away and third-kit designs.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">🌍</span>
+        <h3>National Team Kits</h3>
+        <p>Rep your nation. Nigeria, Brazil, England, Argentina and more.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">👕</span>
+        <h3>Club Polos</h3>
+        <p>Casual club wear — perfect for everyday rep beyond match day.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">🏆</span>
+        <h3>Retro Kits</h3>
+        <p>Classic and vintage jerseys. Old kits hit different.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+      <a href="https://wa.me/2348062816965" target="_blank" class="shop-card">
+        <span class="shop-card-icon">⭐</span>
+        <h3>Player Editions</h3>
+        <p>Personalised with your favourite player's name and number.</p>
+        <span class="card-link">Order via WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM FEED -->
+<section class="ig-feed-section">
+  <div class="container">
+    <div class="ig-header">
+      <div>
+        <p class="section-label">Latest Stock</p>
+        <h2 class="section-title">Fresh off the rack.</h2>
+      </div>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-handle">
+        <div class="ig-handle-icon">📸</div>
+        @genejerseys
+      </a>
+    </div>
+
+    <div class="ig-grid">
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">⚽</span>
+          <span class="ig-card-label">Home Kits</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">🔴</span>
+          <span class="ig-card-label">Club Jerseys</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">🌍</span>
+          <span class="ig-card-label">National Kits</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">🏆</span>
+          <span class="ig-card-label">Retro Kits</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">✈️</span>
+          <span class="ig-card-label">Away Kits</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">👕</span>
+          <span class="ig-card-label">Club Polos</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">⭐</span>
+          <span class="ig-card-label">Player Editions</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="ig-card">
+        <div class="ig-card-inner">
+          <span class="ig-card-emoji">🆕</span>
+          <span class="ig-card-label">New Arrivals</span>
+        </div>
+        <div class="ig-card-overlay">
+          <span>📸 View on Instagram</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="ig-cta">
+      <p>Follow us on Instagram to see every new kit as it drops — updated daily.</p>
+      <a href="https://instagram.com/genejerseys" target="_blank" class="btn-primary">Follow @genejerseys</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLUBS -->
+<section class="clubs" id="available-clubs">
+  <div class="container">
+    <p class="section-label">Available Clubs</p>
+    <h2 class="section-title">Your club is in stock.</h2>
+    <div class="clubs-row">
+      <a href="https://wa.me/2348062816965" class="club-tag">Arsenal</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Chelsea</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Manchester United</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Manchester City</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Liverpool</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Tottenham</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Real Madrid</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Barcelona</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Atletico Madrid</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Bayern Munich</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">PSG</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Juventus</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">AC Milan</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Inter Milan</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Borussia Dortmund</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Ajax</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Brazil</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Nigeria</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Argentina</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">England</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">France</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Portugal</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">Spain</a>
+      <a href="https://wa.me/2348062816965" class="club-tag">+ Many More</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="container">
+    <p class="section-label">Why Gene Jersey</p>
+    <h2 class="section-title">The difference you feel.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">✅</span>
+        <h4>100% Authentic</h4>
+        <p>Every jersey is original. No fakes, no compromises.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📦</span>
+        <h4>Fast Delivery</h4>
+        <p>Quick dispatch so you're ready before the next match.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💬</span>
+        <h4>Easy Ordering</h4>
+        <p>Just send a WhatsApp message. Simple, fast, no stress.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🎽</span>
+        <h4>Hundreds of Styles</h4>
+        <p>Home, away, third, retro, polo — every style covered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <blockquote>"If You Don't Buy, then You Will Find Rates High."</blockquote>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Common questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">How do I place an order? <span>+</span></div>
+        <div class="faq-a">Simply send us a WhatsApp message on 08062816965 or DM us on Instagram @genejerseys. Tell us the club, kit type, and size — we'll handle the rest.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are your jerseys authentic? <span>+</span></div>
+        <div class="faq-a">Yes. Every jersey we sell is 100% original and authentic. We do not sell replicas or fakes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you sell both home and away kits? <span>+</span></div>
+        <div class="faq-a">Yes! We stock home, away, and third kits for most clubs. We also have national team jerseys, club polos, and retro kits.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I get a jersey with a player's name and number? <span>+</span></div>
+        <div class="faq-a">Absolutely. Player edition jerseys are available. Just let us know the name, number, and club when ordering.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does delivery take? <span>+</span></div>
+        <div class="faq-a">Delivery time depends on your location. Contact us on WhatsApp and we'll give you an accurate timeline for your area.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which clubs do you have in stock? <span>+</span></div>
+        <div class="faq-a">We have jerseys for 50+ clubs including Arsenal, Chelsea, Man United, Barcelona, Real Madrid, Liverpool, PSG, Bayern Munich, and many more. If your club isn't listed, just ask — we can source it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Order your kit today.</h2>
+        <p>Ready to rep your club? Reach out via WhatsApp, Instagram, or the form and we'll get back to you fast.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📱</div>
+          <a href="https://wa.me/2348062816965" target="_blank">08062816965 (WhatsApp)</a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📸</div>
+          <a href="https://instagram.com/genejerseys" target="_blank">@genejerseys</a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🐦</div>
+          <a href="https://twitter.com/Geneunitedy" target="_blank">@Geneunitedy</a>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" onsubmit="handleForm(event)">
+          <input type="text" id="f-name" placeholder="Your name" required>
+          <input type="text" id="f-kit" placeholder="Club & kit you want (e.g. Arsenal Home 2024)" required>
+          <input type="text" id="f-size" placeholder="Size (S / M / L / XL / XXL)">
+          <input type="text" id="f-phone" placeholder="Your phone number" required>
+          <textarea id="f-details" placeholder="Any extra details (player name, number, etc.)"></textarea>
+          <a id="btn-whatsapp" href="#" onclick="sendWhatsApp(event)" class="btn-primary" style="display:block; text-align:center; padding:0.9rem;">📱 Send via WhatsApp</a>
+          <a href="https://instagram.com/genejerseys" target="_blank" class="btn-ig-dm" id="btn-ig">📸 DM us on Instagram</a>
+        </form>
+        <p style="font-size:0.72rem; opacity:0.35; margin-top:0.8rem; line-height:1.6;">Fill the form above then click your preferred channel. WhatsApp sends your order details directly. Instagram opens our profile so you can DM us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">GENE JERSEY COLLECTIONS</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#clubs">Clubs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2024 Gene Jersey Collections · @genejerseys</p>
+</footer>
+
+<script>
+  // FAQ toggle
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // WhatsApp order — uses direct href to avoid popup blockers
+  function sendWhatsApp(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('f-name').value.trim();
+    const kit     = document.getElementById('f-kit').value.trim();
+    const size    = document.getElementById('f-size').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const details = document.getElementById('f-details').value.trim();
+
+    if (!name || !kit || !phone) {
+      alert('Please fill in your name, kit, and phone number before sending.');
+      return;
+    }
+
+    const msg =
+      `Hello Gene Jersey Collections! 👋\n\n` +
+      `🧾 *Order Request*\n` +
+      `━━━━━━━━━━━━━━━━\n` +
+      `👤 Name: ${name}\n` +
+      `🎽 Kit: ${kit}\n` +
+      `📏 Size: ${size || 'Not specified'}\n` +
+      `📞 Phone: ${phone}\n` +
+      `📝 Details: ${details || 'None'}\n` +
+      `━━━━━━━━━━━━━━━━\n` +
+      `Please confirm availability and price. Thank you!`;
+
+    // Direct href navigation — bypasses all popup blockers
+    document.getElementById('btn-whatsapp').href = `https://wa.me/2348062816965?text=${encodeURIComponent(msg)}`;
+    document.getElementById('btn-whatsapp').target = '_blank';
+    document.getElementById('btn-whatsapp').click();
+  }
+</script>
+
+</body>
+</html>
