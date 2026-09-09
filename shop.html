@@ -508,7 +508,7 @@
 </div>
 
 <div class="shop-footer">
-  <p>© 2024 Gene Jersey Collections · @genejerseys</p>
+  <p>© <span id="footer-year"></span> Gene Jersey Collections · @genejerseys</p>
   <a href="https://wa.me/2348062816965" target="_blank">📱 WhatsApp Us to Order</a>
 </div>
 
@@ -538,5 +538,6 @@
   });
 </script>
 
+<script>document.getElementById("footer-year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

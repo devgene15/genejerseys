@@ -1190,10 +1190,12 @@
     <li><a href="#clubs">Clubs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <p class="footer-copy">© 2024 Gene Jersey Collections · @genejerseys</p>
+  <p class="footer-copy">© <span id="footer-year"></span> Gene Jersey Collections · @genejerseys</p>
 </footer>
 
 <script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
   // FAQ toggle
   document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
