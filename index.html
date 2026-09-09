@@ -596,7 +596,43 @@
 
   .btn-ig-dm:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* FAQ */
+  .club-search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  .club-search {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    outline: none;
+    width: 220px;
+    transition: border-color 0.2s;
+  }
+
+  .club-search:focus { border-color: var(--gold); }
+  .club-search::placeholder { opacity: 0.4; color: var(--white); }
+
+  .club-search-go {
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.5rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .club-search-go:hover { opacity: 0.85; }
   .faq-list { margin-top: 3rem; }
 
   .faq-item {
@@ -1047,30 +1083,33 @@
     <p class="section-label">Available Clubs</p>
     <h2 class="section-title">Your club is in stock.</h2>
     <div class="clubs-row">
-      <a href="https://wa.me/2348062816965" class="club-tag">Arsenal</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Chelsea</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Manchester United</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Manchester City</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Liverpool</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Tottenham</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Real Madrid</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Barcelona</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Atletico Madrid</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Bayern Munich</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">PSG</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Juventus</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">AC Milan</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Inter Milan</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Borussia Dortmund</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Ajax</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Brazil</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Nigeria</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Argentina</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">England</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">France</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Portugal</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">Spain</a>
-      <a href="https://wa.me/2348062816965" class="club-tag">+ Many More</a>
+      <a href="shop.html?filter=Arsenal" class="club-tag">Arsenal</a>
+      <a href="shop.html?filter=Chelsea" class="club-tag">Chelsea</a>
+      <a href="shop.html?filter=Man United" class="club-tag">Manchester United</a>
+      <a href="shop.html?filter=Man City" class="club-tag">Manchester City</a>
+      <a href="shop.html?filter=Liverpool" class="club-tag">Liverpool</a>
+      <a href="shop.html?filter=Tottenham" class="club-tag">Tottenham</a>
+      <a href="shop.html?filter=Real Madrid" class="club-tag">Real Madrid</a>
+      <a href="shop.html?filter=Barcelona" class="club-tag">Barcelona</a>
+      <a href="shop.html?filter=Atletico Madrid" class="club-tag">Atletico Madrid</a>
+      <a href="shop.html?filter=Bayern Munich" class="club-tag">Bayern Munich</a>
+      <a href="shop.html?filter=PSG" class="club-tag">PSG</a>
+      <a href="shop.html?filter=Juventus" class="club-tag">Juventus</a>
+      <a href="shop.html?filter=AC Milan" class="club-tag">AC Milan</a>
+      <a href="shop.html?filter=Inter Milan" class="club-tag">Inter Milan</a>
+      <a href="shop.html?filter=Borussia Dortmund" class="club-tag">Borussia Dortmund</a>
+      <a href="shop.html?filter=Ajax" class="club-tag">Ajax</a>
+      <a href="shop.html?filter=Brazil" class="club-tag">Brazil</a>
+      <a href="shop.html?filter=Nigeria" class="club-tag">Nigeria</a>
+      <a href="shop.html?filter=Argentina" class="club-tag">Argentina</a>
+      <a href="shop.html?filter=England" class="club-tag">England</a>
+      <a href="shop.html?filter=France" class="club-tag">France</a>
+      <a href="shop.html?filter=Portugal" class="club-tag">Portugal</a>
+      <a href="shop.html?filter=Spain" class="club-tag">Spain</a>
+      <div class="club-search-wrap">
+        <input type="text" id="club-search-input" class="club-search" placeholder="🔍 Search club or country..." oninput="searchClub(this.value)">
+        <a href="shop.html" id="club-search-btn" class="club-search-go">Go</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1196,6 +1235,21 @@
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+  function searchClub(val) {
+    const btn = document.getElementById('club-search-btn');
+    if (val.trim()) {
+      btn.href = 'shop.html?filter=' + encodeURIComponent(val.trim());
+    } else {
+      btn.href = 'shop.html';
+    }
+  }
+
+  document.getElementById('club-search-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      document.getElementById('club-search-btn').click();
+    }
+  });
+
   // FAQ toggle
   document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -1232,10 +1286,8 @@
       `━━━━━━━━━━━━━━━━\n` +
       `Please confirm availability and price. Thank you!`;
 
-    // Direct href navigation — bypasses all popup blockers
-    document.getElementById('btn-whatsapp').href = `https://wa.me/2348062816965?text=${encodeURIComponent(msg)}`;
-    document.getElementById('btn-whatsapp').target = '_blank';
-    document.getElementById('btn-whatsapp').click();
+    const url = `https://wa.me/2348062816965?text=${encodeURIComponent(msg)}`;
+    window.location.href = url;
   }
 </script>
 
