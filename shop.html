@@ -112,8 +112,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .shop-footer p{font-size:.72rem;opacity:.3}
 .shop-footer a{font-size:.75rem;color:var(--gold);opacity:.7;text-decoration:none;transition:opacity .2s}
 .shop-footer a:hover{opacity:1}
-@media(max-width:900px){nav,.main-tabs,.gender-tabs,.filters,.shop-container,.shop-footer{padding-left:1.5rem;padding-right:1.5rem}.jersey-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}
-@media(max-width:480px){.jersey-grid{grid-template-columns:1fr}.shop-hero{padding:7rem 1.5rem 3rem}nav{padding:1rem 1.5rem}.main-tab{padding:.7rem 1rem;font-size:.72rem}}
+.shop-search-bar{padding:1.2rem 4rem;display:flex;align-items:center;gap:.8rem;border-bottom:1px solid rgba(201,168,76,.08);background:rgba(255,255,255,.01)}
+.shop-search-bar input{flex:1;max-width:420px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);color:var(--white);padding:.6rem 1.1rem;font-family:'Jost',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.shop-search-bar input:focus{border-color:var(--gold)}
+.shop-search-bar input::placeholder{opacity:.35;color:var(--white)}
+.shop-search-clear{background:none;border:none;color:var(--white);opacity:.35;cursor:pointer;font-size:1rem;transition:opacity .2s;padding:.2rem .5rem}
+.shop-search-clear:hover{opacity:.8}
+.size-guide-btn{background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:.5rem 1.1rem;font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-left:auto}
+.size-guide-btn:hover{background:rgba(201,168,76,.1)}
+.size-guide-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:600;display:none;align-items:center;justify-content:center;padding:1rem}
+.size-guide-modal.open{display:flex}
+.size-guide-box{background:#111;border:1px solid rgba(201,168,76,.3);max-width:500px;width:100%;padding:2.2rem;position:relative}
+.size-guide-box h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:1.5rem;color:var(--gold)}
+.size-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.size-table th{text-align:left;padding:.5rem .8rem;border-bottom:1px solid rgba(201,168,76,.2);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;opacity:.5;font-weight:400}
+.size-table td{padding:.55rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);opacity:.75}
+.size-table tr:last-child td{border-bottom:none}
+.size-guide-note{font-size:.78rem;opacity:.4;margin-top:1.2rem;line-height:1.6}
+.cart-ig-btn{width:100%;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15);padding:.7rem;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;opacity:.6;transition:opacity .2s,border-color .2s;margin-bottom:.5rem;text-decoration:none;display:block;text-align:center}
+.cart-ig-btn:hover{opacity:1;border-color:rgba(201,168,76,.5);color:var(--gold)}
+@media(max-width:900px){nav,.main-tabs,.gender-tabs,.filters,.shop-container,.shop-footer,.shop-search-bar{padding-left:1.5rem;padding-right:1.5rem}.jersey-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}
+@media(max-width:480px){.jersey-grid{grid-template-columns:1fr}.shop-hero{padding:7rem 1.5rem 3rem}nav{padding:1rem 1.5rem}.main-tab{padding:.7rem 1rem;font-size:.72rem}.shop-search-bar{flex-wrap:wrap}.size-guide-btn{margin-left:0}}
 </style>
 </head>
 <body>
@@ -130,6 +149,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <span class="shop-hero-label">Gene Jersey Collections</span>
   <h1>Jersey Shop</h1>
   <p>Browse club kits, women's kits and national team jerseys. Order directly or add to cart.</p>
+</div>
+
+<div class="shop-search-bar">
+  <input type="text" id="shop-search" placeholder="🔍 Search jerseys, clubs, countries..." oninput="searchJerseys(this.value)">
+  <button class="shop-search-clear" onclick="clearSearch()" title="Clear search">✕</button>
+  <button class="size-guide-btn" onclick="openSizeGuide()">📏 Size Guide</button>
 </div>
 
 <div class="main-tabs">
@@ -1798,7 +1823,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     </div>
     <div class="modal-field"><label>Phone Number</label><input type="text" id="m-phone" placeholder="Your WhatsApp number"></div>
     <div class="modal-field"><label>Extra Details (optional)</label><input type="text" id="m-details" placeholder="Player name, number, etc."></div>
-    <button class="modal-submit" onclick="submitSingleOrder()">📱 Send Order via WhatsApp</button>
+    <button class="modal-submit" onclick="submitSingleOrder()">📱 Order via WhatsApp</button>
+    <a href="https://instagram.com/genejerseys" target="_blank" class="cart-ig-btn" style="margin-top:.6rem;display:block;text-align:center;">📸 Order via Instagram DM</a>
+  </div>
+</div>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="size-guide-modal" id="size-guide-modal" onclick="if(event.target===this)closeSizeGuide()">
+  <div class="size-guide-box">
+    <button class="modal-close" onclick="closeSizeGuide()">✕</button>
+    <h3>📏 Size Guide</h3>
+    <table class="size-table">
+      <thead>
+        <tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Fits</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>S</td><td>88 – 92</td><td>68</td><td>Slim / petite build</td></tr>
+        <tr><td>M</td><td>96 – 100</td><td>71</td><td>Average build</td></tr>
+        <tr><td>L</td><td>104 – 108</td><td>74</td><td>Regular / athletic</td></tr>
+        <tr><td>XL</td><td>112 – 116</td><td>77</td><td>Larger frame</td></tr>
+        <tr><td>XXL</td><td>120 – 124</td><td>80</td><td>Plus / broad shoulder</td></tr>
+        <tr><td>3XL</td><td>128 – 132</td><td>83</td><td>Big & tall</td></tr>
+        <tr><td>4XL</td><td>136 – 140</td><td>86</td><td>Extra large</td></tr>
+      </tbody>
+    </table>
+    <p class="size-guide-note">Not sure? Order one size up for a relaxed fit. Women's kits run slightly smaller — we recommend sizing up by one. Contact us on WhatsApp if you need help choosing.</p>
   </div>
 </div>
 
@@ -1812,6 +1861,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <div class="cart-footer" id="cart-footer" style="display:none">
     <p class="cart-summary" id="cart-summary"></p>
     <button class="cart-checkout-btn" onclick="openCartCheckout()">📱 Checkout via WhatsApp</button>
+    <a href="https://instagram.com/genejerseys" target="_blank" class="cart-ig-btn">📸 Checkout via Instagram DM</a>
     <button class="cart-clear-btn" onclick="clearCart()">Clear Cart</button>
   </div>
 </div>
@@ -1834,6 +1884,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+  // SIZE GUIDE
+  function openSizeGuide(){document.getElementById('size-guide-modal').classList.add('open');}
+  function closeSizeGuide(){document.getElementById('size-guide-modal').classList.remove('open');}
+
+  // SEARCH
+  let searchTerm='';
+  function searchJerseys(val){
+    searchTerm=val.trim().toLowerCase();
+    updateGrid();
+  }
+  function clearSearch(){
+    document.getElementById('shop-search').value='';
+    searchTerm='';
+    updateGrid();
+  }
+
   let activeMain='clubs', activeGender='all', activeClub='all', activeCountry='all';
   const cards=document.querySelectorAll('.jersey-card');
   const emptyState=document.getElementById('empty-state');
@@ -1842,8 +1908,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     let visible=0;
     cards.forEach(card=>{
       const cat=card.dataset.category, gender=card.dataset.gender, club=card.dataset.club;
+      const name=(card.querySelector('.jersey-name')||{}).textContent||'';
       let show=false;
-      if(activeMain==='national'){
+      if(searchTerm){
+        // Search mode: show any card matching the search across all tabs
+        show=club.toLowerCase().includes(searchTerm)||name.toLowerCase().includes(searchTerm);
+      } else if(activeMain==='national'){
         if(cat==='national'){
           show=activeCountry==='all'||club.toLowerCase()===activeCountry.toLowerCase();
         }

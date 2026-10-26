@@ -704,6 +704,59 @@
     letter-spacing: 0.05em;
   }
 
+  /* HOW TO ORDER */
+  .how-to-order { background: var(--black); }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 2.2rem;
+    left: 16.66%;
+    right: 16.66%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+  }
+  .how-step { text-align: center; position: relative; }
+  .how-step-num {
+    width: 44px; height: 44px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--gold);
+    margin: 0 auto 1.4rem;
+    background: var(--black);
+    position: relative; z-index: 2;
+  }
+  .how-step-icon { font-size: 1.8rem; display: block; margin-bottom: 1rem; }
+  .how-step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.6rem; }
+  .how-step p { font-size: 0.82rem; opacity: 0.5; line-height: 1.7; max-width: 220px; margin: 0 auto; }
+  .how-step-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 1.2rem; flex-wrap: wrap; }
+  .how-step-btn {
+    padding: 0.5rem 1rem;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold);
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .how-step-btn:hover { background: rgba(201,168,76,0.12); }
+  .how-step-btn.solid {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--black); border-color: transparent;
+  }
+  .how-step-btn.solid:hover { opacity: 0.85; }
+  @media (max-width: 768px) { .how-steps { grid-template-columns: 1fr; } .how-steps::before { display: none; } }
+
   /* INSTAGRAM FEED */
   .ig-feed-section { background: var(--black); }
 
@@ -846,6 +899,7 @@
   <a href="#" class="nav-logo">GENE <span>JERSEY</span></a>
   <ul class="nav-links">
     <li><a href="#who-we-are">About</a></li>
+    <li><a href="#how-to-order">How to Order</a></li>
     <li><a href="#shop">Shop</a></li>
     <li><a href="#available-clubs">Clubs</a></li>
     <li><a href="#faq">FAQ</a></li>
@@ -901,6 +955,44 @@
     <span>⚽</span>
   </div>
 </div>
+
+<!-- HOW TO ORDER -->
+<section class="how-to-order" id="how-to-order">
+  <div class="container">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">Ordering is simple.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <span class="how-step-icon">🛍️</span>
+        <h4>Browse the Shop</h4>
+        <p>Explore our full catalogue — club kits, national jerseys, women's kits, retro and more.</p>
+        <div class="how-step-actions">
+          <a href="shop.html" class="how-step-btn solid">View Shop</a>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <span class="how-step-icon">🛒</span>
+        <h4>Select & Add to Cart</h4>
+        <p>Pick your jersey, choose your size, and add it to your cart. Browse more before checking out.</p>
+        <div class="how-step-actions">
+          <a href="shop.html" class="how-step-btn">Open Shop</a>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <span class="how-step-icon">✅</span>
+        <h4>Checkout & Confirm</h4>
+        <p>Complete your order via WhatsApp or Instagram DM. We confirm availability and delivery fast.</p>
+        <div class="how-step-actions">
+          <a href="https://wa.me/2348062816965?text=Hello%20Gene%20Jersey%20Collections!%20I%20want%20to%20place%20an%20order." target="_blank" class="how-step-btn solid">📱 WhatsApp</a>
+          <a href="https://instagram.com/genejerseys" target="_blank" class="how-step-btn">📸 Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section class="about" id="who-we-are">
@@ -1072,7 +1164,11 @@
 
     <div class="ig-cta">
       <p>Follow us on Instagram to see every new kit as it drops — updated daily.</p>
-      <a href="https://instagram.com/genejerseys" target="_blank" class="btn-primary">Follow @genejerseys</a>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+        <a href="https://instagram.com/genejerseys" target="_blank" class="btn-primary">📸 Follow @genejerseys</a>
+        <a href="https://instagram.com/genejerseys" target="_blank" class="btn-outline">🛒 Order via Instagram DM</a>
+      </div>
+      <p style="font-size:0.78rem;opacity:0.35;margin-top:0.6rem;">You can also DM us on Instagram to browse, ask about kits, and place your order directly.</p>
     </div>
   </div>
 </section>
@@ -1211,8 +1307,8 @@
           <input type="text" id="f-size" placeholder="Size (S / M / L / XL / XXL / 3XL / 4XL)">
           <input type="text" id="f-phone" placeholder="Your phone number" required>
           <textarea id="f-details" placeholder="Any extra details (player name, number, etc.)"></textarea>
-          <a id="btn-whatsapp" href="#" onclick="sendWhatsApp(event)" class="btn-primary" style="display:block; text-align:center; padding:0.9rem;">📱 Send via WhatsApp</a>
-          <a href="https://instagram.com/genejerseys" target="_blank" class="btn-ig-dm" id="btn-ig">📸 DM us on Instagram</a>
+          <a id="btn-whatsapp" href="#" onclick="sendWhatsApp(event)" class="btn-primary" style="display:block; text-align:center; padding:0.9rem;">📱 Checkout via WhatsApp</a>
+          <a href="https://instagram.com/genejerseys" target="_blank" class="btn-ig-dm" id="btn-ig">📸 Checkout via Instagram DM</a>
         </form>
         <p style="font-size:0.72rem; opacity:0.35; margin-top:0.8rem; line-height:1.6;">Fill the form above then click your preferred channel. WhatsApp sends your order details directly. Instagram opens our profile so you can DM us.</p>
       </div>
