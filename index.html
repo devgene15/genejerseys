@@ -704,6 +704,53 @@
     letter-spacing: 0.05em;
   }
 
+  /* REVIEWS */
+  .reviews-section { background: var(--grey); }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .review-card {
+    background: var(--black);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 1.8rem;
+    transition: border-color 0.25s;
+  }
+  .review-card:hover { border-color: rgba(201,168,76,0.35); }
+  .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .review-text {
+    font-size: 0.88rem;
+    opacity: 0.72;
+    line-height: 1.75;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .review-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+  .review-name { font-size: 0.82rem; font-weight: 500; }
+  .review-date { font-size: 0.7rem; opacity: 0.38; margin-top: 0.1rem; }
+  .review-google-badge {
+    display: flex; align-items: center; gap: 0.4rem;
+    margin-top: 2rem;
+    font-size: 0.72rem; opacity: 0.35; letter-spacing: 0.05em;
+  }
+  @media (max-width: 768px) { .reviews-grid { grid-template-columns: 1fr; } }
+
   /* HOW TO ORDER */
   .how-to-order { background: var(--black); }
   .how-steps {
@@ -902,6 +949,7 @@
     <li><a href="#how-to-order">How to Order</a></li>
     <li><a href="#shop">Shop</a></li>
     <li><a href="#available-clubs">Clubs</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -1236,6 +1284,92 @@
         <h4>Hundreds of Styles</h4>
         <p>Home, away, third, retro, polo — every style covered.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <p class="section-label">Customer Reviews</p>
+    <h2 class="section-title">What our customers say.</h2>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Gene Jersey? Best in town!!! 😍 Quality? That's Hundred! My favourite plug all day."</p>
+        <div class="review-author">
+          <div class="review-avatar">B</div>
+          <div>
+            <div class="review-name">Boluwatife Adebayo</div>
+            <div class="review-date">July 2024 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I've lost count of how many jerseys I've bought from them because I'm always satisfied — quality, price and swift delivery. Can't wait to order again!"</p>
+        <div class="review-author">
+          <div class="review-avatar">H</div>
+          <div>
+            <div class="review-name">H Dharmelaray</div>
+            <div class="review-date">June 2023 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"He has integrity and patience. The most reliable jersey plug I've worked with."</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div>
+            <div class="review-name">Anthony Troy</div>
+            <div class="review-date">January 2025 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The most superb plug that delivers the best jerseys. Trustworthy and fast in delivering."</p>
+        <div class="review-author">
+          <div class="review-avatar">F</div>
+          <div>
+            <div class="review-name">Fisayomi Mosobalaje</div>
+            <div class="review-date">July 2023 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I got a female jersey from this store 🤩. He delivered well and I'm definitely going to make him my plug for jerseys 💯"</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Mary Folakemi</div>
+            <div class="review-date">June 2023 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Quality product and sweet delivery to any destination. He has never disappointed for once — always on time."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Monsuru Dauda</div>
+            <div class="review-date">July 2023 · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="review-google-badge">
+      <span>⭐ All reviews sourced from Google Business · @genejerseys</span>
     </div>
   </div>
 </section>
